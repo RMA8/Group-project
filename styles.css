@@ -1,0 +1,734 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    background-color: #282828;
+    overflow-x: hidden;
+}
+
+/* Header and Navigation */
+header {
+    position: sticky;
+    top: 0;
+    transition: height 0.3s ease, opacity 3s ease;
+    opacity: 1;
+    height: 100px;
+    z-index: 100;
+    background-color: #000000;
+}
+
+#mainNav {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    
+}
+
+#navLinks {
+    list-style: none;
+    display: flex;
+}
+
+#navLinks li {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+#navLinks a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    width: 50px;
+    height: 30px;
+}
+
+/* Carousel Styles */
+#carousel-container {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.carousel {
+    width: 100%;
+    position: relative;
+    background-color: #2a2a2a;
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#slides {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.active {
+    display: block;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.poster {
+    width: 100%;
+    height: 720px;
+    object-fit: cover;
+    display: block;
+}
+
+.trailer {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    max-width: 100%;
+    min-width: 240px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    transform-origin: 90% 95%;
+}
+
+.trailer:hover {
+    right: 3%; 
+    bottom: 3%; 
+    transform: scale(2); 
+    transform-origin: 90% 95%;
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.caption h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.caption p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Navigation Buttons */
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    border-radius: 5px;
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+/* Competition Form Styles */
+#competition {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+}
+        
+#box {
+    display: flex;
+    height: 200px;
+}
+        
+#compA, #compB, #compC {
+    padding: 10px 10px;
+    height: 200px;
+    background:linear-gradient(to top,#18436b,#266bac);
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    text-align: center;
+    flex: 1;
+}
+        
+#compA.active, #compB.active, #compC.active {
+    color: rgb(0, 255, 255);
+}
+        
+#comp_show {
+    display: flex;
+    height: 400px;
+    overflow: hidden;
+}
+        
+#view_show {
+    flex: 0 0 40%;
+    overflow: hidden;
+}
+        
+#view_show img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+        
+#detail {
+    flex: 0 0 60%;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    overflow: auto;
+    color: #000000;
+}
+        
+#detail h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+/* Application Form Styles */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.6;
+    background-color: #282828;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #5fafff;
+}
+
+/* 表单样式 */
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #000000;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-group > div {
+    margin-bottom: 8px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-btn {
+    position: relative;
+    top: 20px;
+    background-color: #3498db;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+.add-member-btn,
+.confirm-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-member-btn:hover,
+.confirm-btn:hover {
+    background-color: #27ae60;
+}
+
+/* 团队成员样式 */
+.team-member {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.team-member input {
+    flex: 1;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.team-member button.remove-member {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 成功消息样式 */
+.success-message {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.success-message h2 {
+    color: #2ecc71;
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    margin-bottom: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .submit-btn, .reset-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Highlight Form Styles */
+
+.photo-wall-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    overflow-x: hidden;
+    gap: 120px;
+    padding: 10px 10px;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    background-color: #078bf0;
+}
+
+.unit {
+    width: 200px;
+    height: 520px;
+    position: relative;
+    overflow: visible;
+    flex-shrink: 0;
+    transform: translateZ(0); /* 触发硬件加速 */
+    will-change: transform; /* 提示浏览器此元素将被频繁变换 */
+}
+
+.hexagon-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+    z-index: 20;
+}
+
+.trapezoid-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+    z-index: 10;
+}
+
+.hexagon {
+    position: absolute;
+    width: 400px;
+    height: 346.41px; /* 200 * sqrt(3) */
+    left: 0;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    z-index: 20;
+    transform-origin: center; /* 设置变换原点 */
+}
+
+.hexagon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trapezoid-up {
+    clip-path: polygon(0% 100%, 100% 100%, 75% 0%, 25% 0%);
+    position: absolute;
+    width: 400px;
+    height: 173px; 
+    left: 0;
+    top: 0;
+    padding: 50px 100px;
+    background-color: #FFD700;
+}
+
+.trapezoid-down {
+    clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
+    position: absolute;
+    width: 400px;
+    height: 173px; 
+    left: 0;
+    bottom: 0;
+    padding: 50px 100px;
+    background-color: #FFD700;
+}
+
+.trapezoid p {
+    color: black;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.unit:hover .hexagon {
+    transform: scale(1.1) translateZ(0); /* 使用transform缩放 */
+    z-index: 100;
+}
+
+.unit:hover .trapezoid p {
+    opacity: 1;
+}
+
+.unit-b:hover .trapezoid-below p {
+    opacity: 1;
+}
+
+/* 占位符用于布局调整 */
+.placeholder {
+    position: absolute;
+    width: 200px;
+    height: 346.41px; /* 200 * sqrt(3) */
+    left: 0;
+}
+
+/* 单元A - 奇数索引，正六边形在上 */
+.unit-a .hexagon {
+    top: 0;
+}
+
+.unit-a .placeholder-below {
+    top: 346.41px; /* Below the hexagon */
+}
+
+.unit-a .trapezoid {
+    top: 346.41px; /* Below the hexagon */
+}
+
+/* 单元B - 偶数索引，梯形在上 */
+.unit-b .placeholder-above {
+    bottom: 346.41px; /* Above the hexagon */
+}
+
+.unit-b .hexagon {
+    bottom: 0;
+}
+
+.unit-b .trapezoid {
+    bottom: 346.41px; /* Above the hexagon */
+}
+
+/* Comparison Form Styles */
+
+.comparison {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100vh;
+    gap: 10px;
+}
+
+.window {
+    width: 48%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 0px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.add-button {
+    padding: 5px;
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0);
+    top: 18px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.search-box {
+    margin-top: 50px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.list-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.item {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #000000;
+    cursor: pointer;
+    height: 50px;
+}
+
+.item:hover {
+    background-color: #e7e7e7;
+}
+
+.extend-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #000000;
+    background-color: white;
+    z-index: 10;
+    padding: 15px;
+    box-sizing: border-box;
+    display: none;
+    flex-direction: column;
+}
+
+.extend-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.extend-content img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.extend-content p {
+    margin: 5px 0;
+}
+
+.expand-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0);
+    width: 30px;
+    height: 100px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+#extendContainerA .expand-button {
+    right: -30px;
+}
+
+#extendContainerB .expand-button {
+    left: -30px;
+}
+
+.contact-section {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+.contact-info p {
+    color: #020202;
+    margin-bottom: 10px;
+}
+.copyright {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #020202;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .carousel {
+        width: 95%;
+    }
+
+    #slides {
+        height: 400px;
+    }
+
+    .poster {
+        height: 300px;
+    }
+
+    .trailer {
+        max-width: 200px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .caption {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .caption h2 {
+        font-size: 1.2rem;
+    }
+
+    .caption p {
+        font-size: 0.9rem;
+    }
+
+    /* Mobile Navigation */
+    .menu-icon {
+        display: block;
+    }
+
+    #navLinks {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #2a2a2a;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    #navLinks.show {
+        display: flex;
+    }
+
+    #navLinks li {
+        margin: 10px 0;
+    }
+
+    #registration {
+        width: 95%;
+    }
+}
