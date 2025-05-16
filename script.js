@@ -10,25 +10,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let hideTimer;
     let isNavVisible = true;
 
-    // 滚动事件监听
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // 如果页面在顶部
         if (scrollTop === 0) {
-            // 恢复导航栏原始高度和完全可见
             clearTimeout(hideTimer);
             header.style.transition = 'height 0.3s ease';
             header.style.height = navHeightDefault + 'px';
             header.style.opacity = '1';
             isNavVisible = true;
         } else {
-            // 如果页面不在顶部
-            // 减小导航栏高度
+            
             header.style.transition = 'height 0.3s ease';
             header.style.height = navHeightMinimized;
             
-            // 设置计时器以使导航栏逐渐消失
             clearTimeout(hideTimer);
             hideTimer = setTimeout(() => {
                 header.style.transition = 'opacity 3s ease';
@@ -38,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 鼠标移动事件监听，用于检测鼠标是否在导航栏区域内
+    
     document.addEventListener('mousemove', function(e) {
         const rect = header.getBoundingClientRect();
         
-        // 如果导航栏已经缩小且鼠标在导航栏区域内
+        
         if (rect.top <= e.clientY && e.clientY <= rect.top + parseInt(navHeightMinimized) && 
             rect.left <= e.clientX && e.clientX <= rect.right && 
             header.style.height === navHeightMinimized) {
@@ -51,17 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
             header.style.transition = 'opacity 0.3s ease';
             isNavVisible = true;
         } 
-        // 如果鼠标移出导航栏区域，不再重置计时器
+        
     });
 
-    // 当鼠标移出导航栏区域后的处理
+    
     document.addEventListener('mouseout', function(e) {
         const rect = header.getBoundingClientRect();
         if (!(rect.top <= e.clientY && e.clientY <= rect.top + parseInt(navHeightMinimized) && 
               rect.left <= e.clientX && e.clientX <= rect.right)) {
-            // 如果鼠标移出导航栏区域，但导航栏已经缩小
+            
             if (header.style.height === navHeightMinimized && header.style.opacity === '1') {
-                // 设置计时器以使导航栏逐渐消失
+                
                 hideTimer = setTimeout(() => {
                     header.style.transition = 'opacity 3s ease';
                     header.style.opacity = '0';
@@ -71,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 移动菜单点击事件
     menuToggle.addEventListener('click', () => {
         const navLinks = document.getElementById('navLinks');
         navLinks.classList.toggle("show");
@@ -136,20 +130,20 @@ document.getElementById('menuToggle').addEventListener('click', () => {
 // Competition
 let competitions = [];
         
-// 页面加载时获取JSON数据
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('competition_data.json')
         .then(response => response.json())
         .then(data => {
             competitions = data;
-            showCompetition(1); // 默认显示第一个竞赛
+            showCompetition(1); 
         })
         .catch(error => {
             console.error('Error fetching competition data:', error);
         });
 });
         
-// 显示竞赛信息的函数
+
 function showCompetition(id) {
     if (id < 1 || id > competitions.length) {
         console.error('Invalid competition ID');
@@ -158,18 +152,18 @@ function showCompetition(id) {
             
     const competition = competitions[id - 1];
             
-    // 更新图片
+
     const viewShow = document.getElementById('view_show');
     viewShow.innerHTML = `<img src="${competition.view}" alt="${competition.name}">`;
             
-    // 更新详情
+
     const detail = document.getElementById('detail');
     detail.innerHTML = `
         <h2>${competition.name}</h2>
         <p>${competition.description.replace(/\n/g, '<br>')}</p>
     `;
             
-    // 更新活动按钮状态
+
     document.getElementById('compA').classList.remove('active');
     document.getElementById('compB').classList.remove('active');
     document.getElementById('compC').classList.remove('active');

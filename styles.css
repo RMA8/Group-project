@@ -107,8 +107,7 @@ header {
     position: absolute;
     bottom: 3%;
     right: 3%;
-    max-width: 100%;
-    min-width: 240px;
+    max-width: 300px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
@@ -119,7 +118,7 @@ header {
 .trailer:hover {
     right: 3%; 
     bottom: 3%; 
-    transform: scale(2); 
+    transform: scale(1.5); 
     transform-origin: 90% 95%;
 }
 
@@ -140,6 +139,7 @@ header {
 .caption h2 {
     margin-bottom: 10px;
     font-size: 1.5rem;
+    color: #ffffff;
 }
 
 .caption p {
@@ -244,7 +244,6 @@ h1 {
     color: #5fafff;
 }
 
-/* 表单样式 */
 form {
     background-color: #ffffff;
     padding: 30px;
@@ -313,49 +312,6 @@ input[type="checkbox"] {
     background-color: #2980b9;
 }
 
-.add-member-btn,
-.confirm-btn {
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.add-member-btn:hover,
-.confirm-btn:hover {
-    background-color: #27ae60;
-}
-
-/* 团队成员样式 */
-.team-member {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.team-member input {
-    flex: 1;
-    margin-right: 10px;
-    margin-bottom: 5px;
-}
-
-.team-member button.remove-member {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* 成功消息样式 */
 .success-message {
     background-color: #fff;
     padding: 30px;
@@ -373,7 +329,6 @@ input[type="checkbox"] {
     margin-bottom: 20px;
 }
 
-/* 响应式设计 */
 @media (max-width: 600px) {
     .container {
         padding: 10px;
@@ -409,8 +364,8 @@ input[type="checkbox"] {
     position: relative;
     overflow: visible;
     flex-shrink: 0;
-    transform: translateZ(0); /* 触发硬件加速 */
-    will-change: transform; /* 提示浏览器此元素将被频繁变换 */
+    transform: translateZ(0);
+    will-change: transform; 
 }
 
 .hexagon-container {
@@ -477,7 +432,7 @@ input[type="checkbox"] {
 }
 
 .unit:hover .hexagon {
-    transform: scale(1.1) translateZ(0); /* 使用transform缩放 */
+    transform: scale(1.1) translateZ(0); 
     z-index: 100;
 }
 
@@ -489,30 +444,30 @@ input[type="checkbox"] {
     opacity: 1;
 }
 
-/* 占位符用于布局调整 */
+
 .placeholder {
     position: absolute;
     width: 200px;
-    height: 346.41px; /* 200 * sqrt(3) */
+    height: 346.41px; 
     left: 0;
 }
 
-/* 单元A - 奇数索引，正六边形在上 */
+
 .unit-a .hexagon {
     top: 0;
 }
 
 .unit-a .placeholder-below {
-    top: 346.41px; /* Below the hexagon */
+    top: 346.41px; 
 }
 
 .unit-a .trapezoid {
-    top: 346.41px; /* Below the hexagon */
+    top: 346.41px; 
 }
 
-/* 单元B - 偶数索引，梯形在上 */
+
 .unit-b .placeholder-above {
-    bottom: 346.41px; /* Above the hexagon */
+    bottom: 346.41px; 
 }
 
 .unit-b .hexagon {
@@ -520,7 +475,7 @@ input[type="checkbox"] {
 }
 
 .unit-b .trapezoid {
-    bottom: 346.41px; /* Above the hexagon */
+    bottom: 346.41px; 
 }
 
 /* Comparison Form Styles */
