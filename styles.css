@@ -36,6 +36,7 @@ header {
 }
 
 #navLinks {
+    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -43,7 +44,7 @@ header {
 }
 
 #navLinks li {
-    margin-left: 20px;
+    margin-left: 200px;
     margin-top: 5px;
 }
 
@@ -211,7 +212,8 @@ button {
         
 #view_show img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
         
@@ -497,6 +499,7 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: column;
     position: relative;
+    background:linear-gradient(to top,#18436b,#266bac);
 }
 
 .add-button {
