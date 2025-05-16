@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 <body>
     <header>
-        <nav id="mainNav">
+        <nav id="mainNav" role="navigation">
             <img src="assets/menu-icon.png" alt="Menu" id="menuToggle" class="menu-icon">
-            <ul id="navLinks">
+            <ul id="navLinks" role="navigation">
                 <li><a href="#carousel-container">Top</a></li>
                 <li><a href="#competition">competition</a></li>
                 <li><a href="#comparison">comparison</a></li>
@@ -109,92 +110,92 @@
         </div>
     </section>
 
-    <section id="application">
-        <h1>UAV Competition 2025 entry form</h1>
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="name">name</label>
-                <input type="text" id="name" name="name" required>
-                <span class="error-message" id="name-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label for="gender">sex</label>
-                <div>
-                    <input type="radio" id="male" name="gender" value="male">
-                    <label for="male">male</label>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">female</label>
+    <div id="app">
+        <section id="application">
+            <h1>UAV Competition 2025 entry form</h1>
+            <form @submit.prevent="submitForm" id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" v-model="form.name" required>
+                    <span class="error-message" v-if="!form.name && submitted">Please enter your name</span>
                 </div>
-                <span class="error-message" id="gender-error"></span>
-            </div>
+                
+                <div class="form-group">
+                    <label for="gender">Sex</label>
+                    <div>
+                        <input type="radio" id="male" value="male" v-model="form.gender">
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" value="female" v-model="form.gender">
+                        <label for="female">Female</label>
+                    </div>
+                    <span class="error-message" v-if="!form.gender && submitted">Please select your gender</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" v-model.number="form.age" min="1" max="120" required>
+                    <span class="error-message" v-if="(form.age < 1 || form.age > 120) && submitted">Please enter a valid age between 1 and 120</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" v-model="form.email" required>
+                    <span class="error-message" v-if="!isValidEmail(form.email) && submitted">Please enter a valid email address</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" v-model="form.phone" required>
+                    <span class="error-message" v-if="!isValidPhone(form.phone) && submitted">Please enter a valid phone number</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="competition_select">Entries</label>
+                    <select id="competition_select" v-model="form.competition" required>
+                        <option value="">Please select an entry</option>
+                        <option value="FAI">The FAI World Drone Racing Championship</option>
+                        <option value="AUVSI">AUVSI Unmanned Aerial Vehicle Competition</option>
+                        <option value="C-ADIC">The China University Students' Aircraft Design Innovation Competition</option>
+                    </select>
+                    <span class="error-message" v-if="!form.competition && submitted">Please select an entry</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="team">Form of Entry</label>
+                    <select id="team" v-model="form.team" required>
+                        <option value="">Please select the form</option>
+                        <option value="individual">Individual</option>
+                        <option value="team">Team (2-4)</option>
+                    </select>
+                    <span class="error-message" v-if="!form.team && submitted">Please select the form</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">Personal Profile</label>
+                    <textarea id="bio" v-model="form.bio" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="terms" v-model="form.terms" required>
+                        I have read and agreed to rules and privacy policies
+                    </label>
+                    <span class="error-message" v-if="!form.terms && submitted">Please agree to the terms</span>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Submit for registration</button>
+                </div>
+            </form>
             
-            <div class="form-group">
-                <label for="age">age</label>
-                <input type="number" id="age" name="age" min="1" max="120" required>
-                <span class="error-message" id="age-error"></span>
+            <div id="success-message" class="success-message" v-if="success">
+                <h2>Successful registration!</h2>
+                <p>Thank you for your participation. We have received your registration information.</p>
+                <p>Details of the competition will be sent to your email, please check.</p>
+                <button @click="resetForm" class="confirm-btn">Confirm</button>
             </div>
-            
-            <div class="form-group">
-                <label for="email">email</label>
-                <input type="email" id="email" name="email" required>
-                <span class="error-message" id="email-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">phone number</label>
-                <input type="tel" id="phone" name="phone" required>
-                <span class="error-message" id="phone-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label for="competition_select">Entries</label>
-                <select id="competition-select" name="competition_select" required>
-                    <option value="FAI">The FAI World Drone Racing Championship</option>
-                    <option value="AUVSI">AUVSI Unmanned Aerial Vehicle Competition</option>
-                    <option value="C-ADIC">The China University Students' Aircraft Design Innovation Competition</option>
-                </select>
-                <span class="error-message" id="competition-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label for="team">Form of Entry</label>
-                <select id="team" name="team" required>
-                    <option value="">Please select the form</option>
-                    <option value="individual">individual</option>
-                    <option value="team">team(2-4)</option>
-                </select>
-                <span class="error-message" id="team-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label for="bio">Personal Profile</label>
-                <textarea id="bio" name="bio" rows="4"></textarea>
-                <span class="error-message" id="bio-error"></span>
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" id="terms" name="terms" required>
-                    I have read and agreed to rules and privacy policies
-                </label>
-                <span class="error-message" id="terms-error"></span>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Submit for registration</button>
-            </div>
-        </form>
-        
-        
-        <div id="success-message" class="success-message" style="display: none;">
-            <h2>Successful registration!</h2>
-            <p>Thank you for your participation. We have received your registration information.</p>
-            <p>Details of the competition will be sent to your email, please check.</p>
-            <button id="confirm-btn" class="confirm-btn">determine</button>
-        </div>
+        </section>
     </div>
-    </section>
 
     <div class="photo-wall-container" id="photoWallContainer"></div>
 

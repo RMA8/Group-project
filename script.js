@@ -183,122 +183,53 @@ function showCompetition(id) {
 // Application
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取表单和相关元素
-    const registrationForm = document.getElementById('registrationForm');
-    const teamSelect = document.getElementById('team');
-    const teamMemberGroup = document.getElementById('team-member-group');
-    const teamMembersContainer = document.getElementById('team-members-container');
-    const addMemberBtn = document.getElementById('add-member');
-    const confirmBtn = document.getElementById('confirm-btn');
-    const successMessage = document.getElementById('success-message');
-    
-    // 团队选项变化时的处理
-    teamSelect.addEventListener('change', function() {
-        if (this.value === 'team') {
-            teamMemberGroup.style.display = 'block';
-            // 添加一个默认的团队成员
-            if (teamMembersContainer.children.length === 0) {
-                addTeamMember();
+    new Vue({
+        el: '#app',
+        data: {
+            form: {
+                name: '',
+                gender: '',
+                age: '',
+                email: '',
+                phone: '',
+                competition: '',
+                team: '',
+                bio: '',
+                terms: false
+            },
+            submitted: false,
+            success: false
+        },
+        methods: {
+            submitForm() {
+                this.submitted = true;
+                if (this.form.name && this.form.gender && this.form.age >= 1 && this.form.age <= 120 && this.isValidEmail(this.form.email) && this.isValidPhone(this.form.phone) && this.form.competition && this.form.team && this.form.terms) {
+                    this.success = true;
+                }
+            },
+            isValidEmail(email) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            },
+            isValidPhone(phone) {
+                const phonePattern = /^1[3-9]\d{9}$/;
+                return phonePattern.test(phone);
+            },
+            resetForm() {
+                this.form = {
+                    name: '',
+                    gender: '',
+                    age: '',
+                    email: '',
+                    phone: '',
+                    competition: '',
+                    team: '',
+                    bio: '',
+                    terms: false
+                };
+                this.submitted = false;
+                this.success = false;
             }
-        } else {
-            teamMemberGroup.style.display = 'none';
-        }
-    });
-    
-    // 添加团队成员按钮点击事件
-    addMemberBtn.addEventListener('click', addTeamMember);
-    
-    // 确认按钮点击事件
-    confirmBtn.addEventListener('click', function() {
-        successMessage.style.display = 'none';
-        registrationForm.style.display = 'block';
-        registrationForm.reset();
-    });
-    
-    // 表单提交事件
-    registrationForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // 重置所有错误信息
-        const errorElements = document.querySelectorAll('.error-message');
-        errorElements.forEach(element => {
-            element.textContent = '';
-        });
-        
-        // 验证表单
-        let isValid = true;
-        
-        // 验证姓名
-        const nameInput = document.getElementById('name');
-        if (!nameInput.value.trim()) {
-            document.getElementById('name-error').textContent = '请输入姓名';
-            isValid = false;
-        }
-        
-        // 验证性别
-        const genderInputs = document.querySelectorAll('input[name="gender"]');
-        let genderSelected = false;
-        genderInputs.forEach(input => {
-            if (input.checked) {
-                genderSelected = true;
-            }
-        });
-        
-        if (!genderSelected) {
-            document.getElementById('gender-error').textContent = '请选择性别';
-            isValid = false;
-        }
-        
-        // 验证年龄
-        const ageInput = document.getElementById('age');
-        const age = parseInt(ageInput.value);
-        
-        if (!age || age < 1 || age > 120) {
-            document.getElementById('age-error').textContent = '请输入1-120之间的有效年龄';
-            isValid = false;
-        }
-        
-        // 验证邮箱
-        const emailInput = document.getElementById('email');
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!emailPattern.test(emailInput.value)) {
-            document.getElementById('email-error').textContent = '请输入有效的邮箱地址';
-            isValid = false;
-        }
-        
-        // 验证电话
-        const phoneInput = document.getElementById('phone');
-        const phonePattern = /^1[3-9]\d{9}$/; // 简单的中国手机号验证
-        
-        if (!phonePattern.test(phoneInput.value)) {
-            document.getElementById('phone-error').textContent = '请输入有效的手机号码';
-            isValid = false;
-        }
-        
-        // 验证参赛项目
-        const competitionSelect = document.getElementById('competition_select');
-        if (competitionSelect.value === '') {
-            document.getElementById('competition-error').textContent = '请选择参赛项目';
-            isValid = false;
-        }
-        
-        // 验证参赛形式
-        const teamSelect = document.getElementById('team');
-        if (teamSelect.value === '') {
-            document.getElementById('team-error').textContent = '请选择参赛形式';
-            isValid = false;
-        }
-        
-        const termsInput = document.getElementById('terms');
-        if (!termsInput.checked) {
-            document.getElementById('terms-error').textContent = 'Please agree to the competition rules and Privacy Policy';
-            isValid = false;
-        }
-        
-        if (isValid) {
-            registrationForm.style.display = 'none';
-            successMessage.style.display = 'block';
         }
     });
 });

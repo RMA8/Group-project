@@ -23,9 +23,9 @@ header {
 }
 
 #mainNav {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 20px;
     align-items: center;
 }
 
@@ -36,8 +36,10 @@ header {
 }
 
 #navLinks {
-    list-style: none;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    list-style-type: none;
 }
 
 #navLinks li {
