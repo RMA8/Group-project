@@ -276,7 +276,7 @@ function createUnit(data, index) {
 }
 
 // Load data from JSON file and create units
-fetch('photoData.json')
+fetch('photodata.json')
     .then(response => response.json())
     .then(data => {
         const photoWallContainer = document.getElementById("photoWallContainer");
